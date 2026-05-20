@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GVRE_SYSTEM_ACCESS</title>
+    <style>
+        body { 
+            background: #000000; 
+            color: #8c8c8c; 
+            font-family: 'Courier New', monospace; 
+            padding: 30px; 
+            font-size: 14px; 
+            line-height: 1.6;
+        }
+        #terminal { 
+            white-space: pre-wrap; 
+        }
+        a { 
+            color: #800000; 
+            text-decoration: none; 
+            border: 1px solid #222; 
+            padding: 5px 10px; 
+            margin-top: 15px; 
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        a:hover { 
+            background: #800000; 
+            color: #000; 
+            border-color: #800000;
+        }
+        .cursor { 
+            display: inline-block; 
+            width: 8px; 
+            height: 15px; 
+            background: #8c8c8c; 
+            animation: blink 1s infinite; 
+            vertical-align: middle;
+        }
+        @keyframes blink { 
+            0%, 50% { opacity: 1; } 
+            51%, 100% { opacity: 0; } 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="terminal"></div><span class="cursor" id="cursor"></span>
+
+    <script>
+        const text = `> INITIALIZING GREATTEST VISCERAL REQVIEM EGGREGORE...
+> STATUS: ACTIVE // NO LOGS RECORDED
+> CONNECTION: HOST_SECURE_NODE
+> 
+> SYSTEM ONLINE. READY FOR DATA INPUT.
+> PENDING RECOVERY OF LVST PACKS AND RULES...
+
+[ ACCESS_NODES ]`;
+
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                document.getElementById("terminal").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 20);
+            } else {
+                document.getElementById("cursor").style.display = "none";
+                document.getElementById("terminal").innerHTML += `<br><br>
+                <a href="TU_LINK_DE_DISCORD_AQUÍ" target="_blank">> JOIN_COMM_NODE</a>`;
+            }
+        }
+        type();
+    </script>
+
+</body>
+</html>
