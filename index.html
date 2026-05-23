@@ -1,266 +1,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GVRE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>GVRE</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<!-- =========================
+FONT
+========================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+EASY CUSTOMIZATION
+========================= */
+
+:root{
+    --background: #050505;
+    --wine: #952f57;
+    --wine-light: #ca668b;
+    --text: #ffffff;
+    --panel: rgba(10,10,10,0.88);
+}
+
+/* =========================
+CHANGE BACKGROUND IMAGE HERE
+========================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.92)),
+    url("background.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    z-index:-2;
+}
+
+/* =========================
+GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--background);
+    color:var(--text);
+    font-family:'Cinzel', serif;
+    overflow-x:hidden;
+}
+
+/* =========================
+CHANGE LOGO IMAGE HERE
+========================= */
+
+.logo{
+    position:fixed;
+
+    top:18px;
+    left:18px;
+
+    width:70px;
+
+    z-index:9999;
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+nav{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    padding:28px;
+
+    display:flex;
+    justify-content:center;
+
+    background:rgba(0,0,0,0.35);
+
+    backdrop-filter:blur(10px);
+
+    border-bottom:1px solid rgba(202,102,139,0.18);
+
+    z-index:999;
+}
+
+.nav-links{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+
+    transition:0.25s ease;
+}
+
+.nav-links a:hover{
+    color:var(--wine-light);
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:150px 8% 100px;
+}
+
+.hero-content{
+    max-width:1200px;
+}
+
+.hero-title{
+    font-size:clamp(4rem, 10vw, 8rem);
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+    text-shadow:
+    0 0 20px rgba(202,102,139,0.2);
+}
+
+.hero-subtitle{
+    font-size:1.2rem;
+
+    color:var(--wine-light);
+
+    margin-bottom:16px;
+
+    letter-spacing:2px;
+}
+
+.hero-subtitle2{
+    font-size:0.9rem;
+
+    letter-spacing:10px;
+
+    margin-bottom:45px;
+
+    opacity:0.8;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:15px 28px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:white;
+
+    border:1px solid rgba(202,102,139,0.2);
+
+    background:rgba(149,47,87,0.18);
+
+    transition:0.25s ease;
+
+    backdrop-filter:blur(10px);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+
+    background:rgba(202,102,139,0.18);
+
+    box-shadow:
+    0 0 25px rgba(202,102,139,0.15);
+}
+
+/* =========================
+SECTIONS
+========================= */
+
+section{
+    padding:110px 8%;
+}
+
+.section-title{
+    font-size:2.4rem;
+
+    margin-bottom:30px;
+}
+
+.section-text{
+    line-height:2;
+
+    color:rgba(255,255,255,0.82);
+
+    max-width:1200px;
+}
+
+/* =========================
+CARDS
+========================= */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:24px;
+
+    margin-top:40px;
+}
+
+.card{
+    background:var(--panel);
+
+    border:1px solid rgba(202,102,139,0.18);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    transition:0.3s ease;
+
+    backdrop-filter:blur(10px);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+
+    border-color:rgba(202,102,139,0.4);
+
+    box-shadow:
+    0 0 25px rgba(202,102,139,0.1);
+}
+
+.card h3{
+    margin-bottom:18px;
+
+    color:var(--wine-light);
+}
+
+.card p{
+    line-height:1.9;
+
+    color:rgba(255,255,255,0.8);
+}
+
+/* =========================
+TABLE
+========================= */
+
+table{
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:35px;
+
+    background:rgba(10,10,10,0.82);
+
+    border-radius:18px;
+
+    overflow:hidden;
+}
+
+th, td{
+    padding:18px;
+
+    border:1px solid rgba(202,102,139,0.15);
+
+    text-align:center;
+}
+
+th{
+    background:rgba(149,47,87,0.3);
+}
+
+tr:hover{
+    background:rgba(202,102,139,0.08);
+}
+
+/* =========================
+LINKS
+========================= */
+
+.custom-link{
+    color:var(--wine-light);
+
+    text-decoration:none;
+}
+
+.custom-link:hover{
+    text-decoration:underline;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    padding:40px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(202,102,139,0.15);
+
+    color:rgba(255,255,255,0.55);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .hero-subtitle2{
+        letter-spacing:5px;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #050505;
-      color: #f5f5f5;
-      overflow-x: hidden;
-      background-image:
-        radial-gradient(circle at top, rgba(120,120,120,0.15), transparent 30%),
-        radial-gradient(circle at bottom, rgba(255,255,255,0.04), transparent 25%);
+    .nav-links{
+        gap:18px;
     }
 
-    header {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
+    .logo{
+        width:55px;
     }
 
-    h1 {
-      font-size: 6rem;
-      letter-spacing: 0.6rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
+}
 
-    .subtitle {
-      font-size: 1.2rem;
-      opacity: 0.8;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.2rem;
-    }
-
-    .subtitle2 {
-      font-size: 0.95rem;
-      opacity: 0.55;
-      letter-spacing: 0.45rem;
-      margin-bottom: 3rem;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .buttons a {
-      text-decoration: none;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 1rem 2rem;
-      border-radius: 14px;
-      transition: 0.3s ease;
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(10px);
-    }
-
-    .buttons a:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-3px);
-    }
-
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 6rem 2rem;
-    }
-
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 2rem;
-      letter-spacing: 0.15rem;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      backdrop-filter: blur(12px);
-    }
-
-    .card h3 {
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-
-    .card a {
-      color: white;
-      text-decoration: none;
-      opacity: 0.8;
-      transition: 0.25s;
-    }
-
-    .card a:hover {
-      opacity: 1;
-    }
-
-    .socials {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 3rem 2rem;
-      opacity: 0.5;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 3.5rem;
-      }
-
-      .subtitle2 {
-        letter-spacing: 0.2rem;
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>GVRE</h1>
+<!-- =========================
+CHANGE LOGO IMAGE HERE
+========================= -->
 
-    <div class="subtitle">
-      Greattest Visceral - Reqviem Eggregore
-    </div>
+<img src="logo.png" class="logo">
 
-    <div class="subtitle2">
-      - M A N I A • P A L A T I N A T E -
-    </div>
+<!-- =========================
+NAVBAR
+========================= -->
 
-    <div class="buttons">
-      <a href="#socials">Join the Community</a>
-      <a href="#about">About GVRE</a>
-      <a href="#lvst">Lvst Dans</a>
-    </div>
-  </header>
+<nav>
 
-  <section id="about">
-    <h2>About this clan</h2>
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#rules">Rules</a>
+<a href="#dans">Lvst Dans</a>
+<a href="#packs">Practice Packs</a>
+<a href="#players">Players</a>
+<a href="#replays">Replays</a>
+<a href="#socials">Socials</a>
+</div>
 
-    <div class="card">
-      <p>
-        More than a collective, GVRE is a shared frequency for those who resonate with the discipline, expression and identity behind high-level osu!mania challenge culture.
-        Built around precision, atmosphere and overwhelming energy, the project exists as both a competitive and artistic manifestation.
-      </p>
-    </div>
-  </section>
+</nav>
 
-  <section id="lvst">
-    <h2>Lvst Dans</h2>
+<!-- =========================
+HERO
+========================= -->
 
-    <div class="card">
-      <h3>Lvst I – Lvst X</h3>
-      <a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank">
-        Download Pack
-      </a>
-    </div>
+<section class="hero">
 
-    <div class="card">
-      <h3>Lvst Alpha – Lvst Epsilon</h3>
-      <a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank">
-        Download Pack
-      </a>
-    </div>
+<div class="hero-content">
 
-    <div class="card">
-      <h3>Lvst Zeta – Lvst Theta</h3>
-      <a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank">
-        Download Pack
-      </a>
-    </div>
-  </section>
+<h1 class="hero-title">
+GVRE
+</h1>
 
-  <section>
-    <h2>Replay Submission</h2>
+<p class="hero-subtitle">
+Greattest Visceral Reqviem Eggregore
+</p>
 
-    <div class="card">
-      <a href="https://discord.gg/4aPf2jZ39x" target="_blank">
-        Submit your replay here
-      </a>
-    </div>
-  </section>
+<p class="hero-subtitle2">
+M A N I A • P A L A T I N A T E
+</p>
 
-  <section>
-    <h2>GVRE Practice Packs</h2>
+<div class="buttons">
 
-    <div class="card">
-      <a href="https://drive.google.com/drive/folders/1RQqvJvtnC6_9rcE5S5wHj-LqQuQXWT-e" target="_blank">
-        Open Practice Packs
-      </a>
-    </div>
-  </section>
+<a href="#socials" class="btn">
+Join The Community
+</a>
 
-  <section id="socials">
-    <h2>Profiles & Socials</h2>
+<a href="#about" class="btn">
+About GVRE
+</a>
 
-    <div class="socials">
+<a href="#dans" class="btn">
+Lvst Dans
+</a>
 
-      <div class="card">
-        <h3>osu!</h3>
-        <a href="https://osu.ppy.sh/users/39826033" target="_blank">
-          [GVRE] Endorsi
-        </a>
-      </div>
+</div>
 
-      <div class="card">
-        <h3>YouTube</h3>
-        <a href="https://youtube.com/@endorsigvre?si=Q6wmPdL1mmgxF1VV" target="_blank">
-          @endorsigvre
-        </a>
-      </div>
+</div>
 
-      <div class="card">
-        <h3>Discord</h3>
-        <p>endorsigvre</p>
-      </div>
+</section>
 
-      <div class="card">
-        <h3>Twitter (X)</h3>
-        <a href="https://x.com/EndorsiGVRE" target="_blank">
-          @EndorsiGVRE
-        </a>
-      </div>
+<!-- =========================
+ABOUT
+========================= -->
 
-      <div class="card">
-        <h3>TikTok</h3>
-        <a href="https://www.tiktok.com/@endorsigvre?_r=1&_t=ZS-96bB5EVYaN5" target="_blank">
-          @endorsigvre
-        </a>
-      </div>
+<section id="about">
 
-    </div>
-  </section>
+<h2 class="section-title">
+About this clan
+</h2>
 
-  <footer>
-    GVRE • Greattest Visceral - Reqviem Eggregore
-  </footer>
+<p class="section-text">
+
+More than a collective, GVRE is a shared frequency for those who resonate with the discipline of progress.
+
+Our structure welcomes both the virtuoso who defies the impossible and the enthusiast who finds delight in daily improvement.
+
+We open our shadows to those seeking a refuge of common interests, where dialogue and play intertwine in the pursuit of a higher purpose.
+
+(Our focus is solely on 4k).
+
+</p>
+
+</section>
+
+<!-- =========================
+RULES
+========================= -->
+
+<section id="rules">
+
+<h2 class="section-title">
+Rules and Conditions
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Rule I — Respect</h3>
+
+<p>
+All players within clan spaces must be very respectful of each other; we have 0% tolerance for any disrespect.
+</p>
+</div>
+
+<div class="card">
+<h3>Rule II — Fair Play</h3>
+
+<p>
+Every play, especially those submitted for publication on our social media, must be 100% legitimate.
+If cheating is detected, the replay will be disqualified.
+</p>
+</div>
+
+<div class="card">
+<h3>Rule III — Common Sense</h3>
+
+<p>
+If there is something that is not in these three simple rules and is not good for the other members or for the image of the clan, it is best to avoid it.
+</p>
+</div>
+
+<div class="card">
+<h3>Condition I</h3>
+
+<p>
+Each replay must be strictly submitted via Discord or a download link for the video must be sent via DM on TikTok.
+</p>
+</div>
+
+<div class="card">
+<h3>Condition II</h3>
+
+<p>
+The Lvst Dans replays need to be verified; you can use a handcam or a key overlay.
+</p>
+</div>
+
+<div class="card">
+<h3>Condition III</h3>
+
+<p>
+For replays to be accepted, the username must include the tag [GVRE].
+</p>
+</div>
+
+<div class="card">
+<h3>Condition IV</h3>
+
+<p>
+For the clan leaderboards, the following will be evaluated:
+PP, Dans, Lvst Dans and current performance.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+LVST DANS
+========================= -->
+
+<section id="dans">
+
+<h2 class="section-title">
+Lvst Dans
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Lvst I — Lvst X</h3>
+
+<p>
+<a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank" class="custom-link">
+Download Pack
+</a>
+</p>
+</div>
+
+<div class="card">
+<h3>Lvst Alpha — Lvst Epsilon</h3>
+
+<p>
+<a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank" class="custom-link">
+Download Pack
+</a>
+</p>
+</div>
+
+<div class="card">
+<h3>Lvst Zeta — Lvst Theta</h3>
+
+<p>
+<a href="https://drive.google.com/drive/folders/1YmZx2akWA4skJD6UiQHefSwpV5Of18JC" target="_blank" class="custom-link">
+Download Pack
+</a>
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+PRACTICE PACKS
+========================= -->
+
+<section id="packs">
+
+<h2 class="section-title">
+Practice Packs GVRE
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>GVRE Practice Packs</h3>
+
+<p>
+<a href="https://drive.google.com/drive/folders/1RQqvJvtnC6_9rcE5S5wHj-LqQuQXWT-e" target="_blank" class="custom-link">
+Download Packs
+</a>
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+PLAYERS TABLE
+========================= -->
+
+<section id="players">
+
+<h2 class="section-title">
+Top 25 Players
+</h2>
+
+<table>
+
+<tr>
+<th>#</th>
+<th>Player</th>
+<th>PP</th>
+<th>Dan</th>
+</tr>
+
+<tr><td>1</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>2</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>3</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>4</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>5</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>6</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>7</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>8</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>9</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>10</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>11</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>12</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>13</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>14</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>15</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>16</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>17</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>18</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>19</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>20</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>21</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>22</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>23</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>24</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+<tr><td>25</td><td>[GVRE] Player</td><td>-----</td><td>-----</td></tr>
+
+</table>
+
+</section>
+
+<!-- =========================
+REPLAYS
+========================= -->
+
+<section id="replays">
+
+<h2 class="section-title">
+Replay Submission
+</h2>
+
+<p class="section-text">
+
+Discord Server Link:
+
+<br><br>
+
+<a href="https://discord.gg/4aPf2jZ39x" target="_blank" class="custom-link">
+https://discord.gg/4aPf2jZ39x
+</a>
+
+</p>
+
+</section>
+
+<!-- =========================
+SOCIALS
+========================= -->
+
+<section id="socials">
+
+<h2 class="section-title">
+Socials
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Discord</h3>
+
+<p>
+endorsigvre
+</p>
+</div>
+
+<div class="card">
+<h3>X</h3>
+
+<p>
+<a href="https://x.com/EndorsiGVRE" target="_blank" class="custom-link">
+@EndorsiGVRE
+</a>
+</p>
+</div>
+
+<div class="card">
+<h3>TikTok</h3>
+
+<p>
+<a href="https://www.tiktok.com/@endorsigvre?_r=1&_t=ZS-96bB5EVYaN5" target="_blank" class="custom-link">
+@endorsigvre
+</a>
+</p>
+</div>
+
+<div class="card">
+<h3>YouTube</h3>
+
+<p>
+<a href="https://youtube.com/@endorsigvre?si=Q6wmPdL1mmgxF1VV" target="_blank" class="custom-link">
+Endorsi GVRE
+</a>
+</p>
+</div>
+
+<div class="card">
+<h3>osu!</h3>
+
+<p>
+<a href="https://osu.ppy.sh/users/39826033" target="_blank" class="custom-link">
+[GVRE] Endorsi
+</a>
+</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+GVRE — Greattest Visceral Reqviem Eggregore
+
+</footer>
 
 </body>
 </html>
